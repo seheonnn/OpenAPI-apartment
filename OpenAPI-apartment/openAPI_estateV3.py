@@ -23,7 +23,7 @@ def searchLawdCd(locate_nm):
 data = {
     '아파트이름' : [],
     '연도' : [],
-    '평균거래금액' : []
+    '평균거래금액' : [],
 }
 def printApartTransaction(dongCode, apartName, sDate, eDate):
     url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade'
@@ -111,7 +111,8 @@ printApartTransaction(dongCode, '불당호반써밋플레이스센터시티', 20
 
 # print(data)
 df = pd.DataFrame(data, index=data['연도']) # index추가할 수 있음
-print(df)
+df.to_excel('apart_deal_info.xlsx', index=False)
+# print(df)
 
 plt.xticks(rotation=90)
 plt.xlabel('날짜')
