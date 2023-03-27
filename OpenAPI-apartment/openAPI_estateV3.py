@@ -7,6 +7,7 @@ import xmltodict
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
+import openpyxl
 
 # 그래프 한글 사용
 from matplotlib import font_manager, rc
@@ -110,6 +111,7 @@ printApartTransaction(dongCode, '천안불당지웰더샵', 202101, 202212)
 printApartTransaction(dongCode, '불당호반써밋플레이스센터시티', 202101, 202212)
 
 # print(data)
+# 엑셀 추출
 df = pd.DataFrame(data, index=data['연도']) # index추가할 수 있음
 df.to_excel('apart_deal_info.xlsx', index=False)
 # print(df)
@@ -118,5 +120,19 @@ plt.xticks(rotation=90)
 plt.xlabel('날짜')
 plt.ylabel('거래금액')
 plt.legend()
+
+plt.savefig('graph.png', dpi=300, bbox_inches='tight')
+
 plt.show()
+
+
+workbook = openpyxl.load_workbook('apart_deal_info.xlsx')
+sheet = workbook.active
+# 그래프 이미지를 엑셀 파일에 추가
+img = openpyxl.drawing.image.Image('graph.png')
+img.height = 700
+img.width = 700
+sheet.add_image(img, 'F1')
+# 엑셀 파일 저장
+workbook.save('apart_deal_info.xlsx')
 
