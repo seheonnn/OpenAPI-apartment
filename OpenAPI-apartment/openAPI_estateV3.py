@@ -132,7 +132,7 @@ sheet = workbook.active
 img = openpyxl.drawing.image.Image('graph.png')
 img.height = 700
 img.width = 700
-sheet.add_image(img, 'F1')
+sheet.add_image(img, 'E1')
 # 엑셀 파일 저장
 workbook.save('apart_deal_info.xlsx')
 
